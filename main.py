@@ -1,3 +1,5 @@
+#Version 1
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -66,12 +68,6 @@ correlation_matrix = data.corr()
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
 plt.title('Correlation Heatmap')
 plt.show()
-
-# The "Wine Quality" dataset is suited for classification. The reasoning is as follows:
-# - The target variable in the dataset is 'quality', which is an integer value representing the quality of the wine on a scale from 0 to 10.
-# - Classification problems involve predicting a discrete label (in this case, the quality score) based on input features.
-# - The goal is to classify each wine sample into one of the quality categories based on its chemical properties.
-# Since we have predefined labels (quality scores) and the goal is to predict these labels, classification is the appropriate approach.
 
 # Phase 2: Data Preprocessing and Model Training
 
@@ -228,5 +224,3 @@ print("\nSummary of Accuracies:")
 print(f"KNN: {knn_accuracy:.4f}")
 print(f"Decision Tree: {dt_accuracy:.4f}")
 print(f"Random Forest: {rf_accuracy:.4f}")
-
-# Compare the performance of each model and discuss why some performed better or worse on the dataset.
