@@ -109,7 +109,6 @@ y = data_imputed['quality']
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-
 # Phase 2: Model Implementation and Evaluation
 
 # Decision Tree Classifier with hyperparameter tuning
