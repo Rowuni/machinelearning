@@ -1,4 +1,4 @@
-#Version 4
+#Version: 5.0
 
 import pandas as pd
 import seaborn as sns
@@ -17,7 +17,7 @@ from sklearn.pipeline import Pipeline
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
 data = pd.read_csv(url, sep=';')
 
-# Phase 1: Exploratory Data Analysis (EDA)
+
 
 # Visualize data distributions
 plt.figure(figsize=(12, 8))
@@ -107,6 +107,9 @@ y = data_imputed['quality']
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+
+
+
 # Decision Tree Classifier with hyperparameter tuning
 dt_params = {'max_depth': [5, 10, 15, 20, None]}
 dt_classifier = GridSearchCV(DecisionTreeClassifier(random_state=42), dt_params, cv=5)
@@ -146,11 +149,14 @@ print(f"KNN: {knn_accuracy:.4f}")
 print(f"Decision Tree: {dt_accuracy:.4f}")
 print(f"Random Forest: {rf_accuracy:.4f}")
 
+
+
+
 # Binarize the classes for multi-class ROC curve
 classes = sorted(y.unique())
 y_test_binarized = label_binarize(y_test, classes=classes)
 
-# Decision Tree Classifier with hyperparameter tuning
+# Decision Tree Classifier
 dt_classifier = GridSearchCV(DecisionTreeClassifier(random_state=42), dt_params, cv=5)
 dt_classifier.fit(X_train, y_train)
 y_pred_dt = dt_classifier.predict(X_test)
@@ -160,10 +166,7 @@ print(classification_report(y_test, y_pred_dt, zero_division=0))
 print("Best Parameters:", dt_classifier.best_params_)
 print("Accuracy:", dt_accuracy)
 
-# Probability scores for ROC curve
 y_score_dt = dt_classifier.predict_proba(X_test)
-
-# Compute ROC curve for each class
 fpr = dict()
 tpr = dict()
 roc_auc = dict()
@@ -171,7 +174,6 @@ for i in range(len(classes)):
     fpr[i], tpr[i], _ = roc_curve(y_test_binarized[:, i], y_score_dt[:, i])
     roc_auc[i] = auc(fpr[i], tpr[i])
 
-# Plot ROC curves
 plt.figure()
 for i in range(len(classes)):
     plt.plot(fpr[i], tpr[i], label='Class {0} (AUC = {1:0.2f})'.format(classes[i], roc_auc[i]))
@@ -182,7 +184,7 @@ plt.title('ROC Curve - Decision Tree')
 plt.legend(loc='lower right')
 plt.show()
 
-# Repeat for the Random Forest Classifier
+# Random Forest Classifier
 rf_classifier = GridSearchCV(RandomForestClassifier(random_state=42), rf_params, cv=5)
 rf_classifier.fit(X_train, y_train)
 y_pred_rf = rf_classifier.predict(X_test)
@@ -207,7 +209,7 @@ plt.title('ROC Curve - Random Forest')
 plt.legend(loc='lower right')
 plt.show()
 
-# Repeat for the K-Nearest Neighbors Classifier
+# K-Nearest Neighbors Classifier
 knn_classifier = GridSearchCV(KNeighborsClassifier(), knn_params, cv=5)
 knn_classifier.fit(X_train, y_train)
 y_pred_knn = knn_classifier.predict(X_test)
