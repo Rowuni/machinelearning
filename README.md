@@ -11,6 +11,8 @@
                                '----------------'  '----------------' 
 
 
-Machine Learning project for semester 5
+This Github contains every part of our Machine Learning Project for semester 5.
 
-To run the program, you need to run the main.py
+To run the project, you need to run the main.py.
+
+It contains every part of the project step by step.
