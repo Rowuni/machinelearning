@@ -17,7 +17,6 @@ from sklearn.pipeline import Pipeline
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
 data = pd.read_csv(url, sep=';')
 
-
 # Visualize data distributions
 plt.figure(figsize=(12, 8))
 sns.histplot(data['quality'], kde=True)
